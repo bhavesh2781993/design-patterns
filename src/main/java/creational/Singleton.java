@@ -1,5 +1,6 @@
 package creational;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -30,6 +31,7 @@ public class Singleton implements Serializable, Cloneable {
     }
 
     // Prevents Object creation on Object deserialization
+    @Serial
     public Object readResolve() {
         return instance;
     }
@@ -37,6 +39,6 @@ public class Singleton implements Serializable, Cloneable {
     // Prevents Object cloning, This is not required as by default clone is not available. Added here just for readability
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        throw new CloneNotSupportedException();
+        return super.clone();
     }
 }
