@@ -1,7 +1,7 @@
 package behavioral;
 
 /**
- * Provides a way to go through each element in a group of elements and hides the internal structure of how group is traversed.
+ * Provides a way to go through each element in a group of elements and hides the traversal implementation.
  * Example, ResultSet from JDBC, Collection Iterator
  */
 public class Iterator {
