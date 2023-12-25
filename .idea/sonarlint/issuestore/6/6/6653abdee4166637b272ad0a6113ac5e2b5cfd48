@@ -1,0 +1,10 @@
+
+U	java:S106"9Replace this use of System.out or System.err by a logger.(âÌ™8üîóº1
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(›–ÿ÷ÿÿÿÿÿ8ÕËóº1
+U	java:S106!"9Replace this use of System.out or System.err by a logger.(ÿöÃ8í–óº1
+<
+java:S1068&"&Remove this unused "id" private field.(æ¨ç†
+?
+java:S1068'")Remove this unused "color" private field.(È„…¦
+?
+java:S1068(")Remove this unused "price" private field.(ìù¥ë
