@@ -1,5 +1,8 @@
 package structural;
 
+/**
+ * <img src="classpath:/templates/bridge.png">
+ */
 public class Bridge {
     public static void main(String[] args) {
         LivingThings dog = new Dog(new LandBreather());
