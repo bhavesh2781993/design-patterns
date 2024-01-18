@@ -30,8 +30,7 @@ public class Decorator {
 
         System.out.println("==========");
 
-        //
-        new BufferedReader(new InputStreamReader(new FileInputStream("")));
+        // new BufferedReader(new InputStreamReader(new FileInputStream("")));
     }
 }
 
@@ -61,14 +60,14 @@ class SMSSender implements NotificationSender {
     private final NotificationSender notificationSender;
 
     public SMSSender(NotificationSender notificationSender) {
-        if (notificationSender != null) {
-            notificationSender.send();
-        }
         this.notificationSender = notificationSender;
     }
 
     @Override
     public void send() {
+        if (this.notificationSender != null) {
+            this.notificationSender.send();
+        }
         System.out.println("Sending SMS Notification");
     }
 }
