@@ -50,8 +50,6 @@ class Directory implements FileSystem {
     @Override
     public void ls() {
         System.out.println("Directory: " + directoryName);
-        for(FileSystem fs: fileSystems) {
-            fs.ls();
-        }
+        fileSystems.forEach(FileSystem::ls);
     }
 }

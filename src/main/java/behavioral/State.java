@@ -64,12 +64,12 @@ interface VMState {
         throw new RuntimeException("Click on insert coin button not allowed");
     }
 
-    default void clickOnStartProductSelectionButton(VendingMachine vendingMachine) {
-        throw new RuntimeException("Click on start product selection button not allowed");
-    }
-
     default void insertCoin(VendingMachine vendingMachine, Coin coin) {
         throw new RuntimeException("Insert coin button not allowed");
+    }
+
+    default void clickOnStartProductSelectionButton(VendingMachine vendingMachine) {
+        throw new RuntimeException("Click on start product selection button not allowed");
     }
 
     default void chooseProduct(VendingMachine vendingMachine, int codeNo) {
@@ -90,17 +90,18 @@ interface VMState {
 
 }
 
-class DispenseState implements VMState {
-    public DispenseState(VendingMachine vendingMachine, int codeNo) {
-        dispenseProduct(vendingMachine, codeNo);
+class IdleState implements VMState {
+    public IdleState() {
+        System.out.println("Currently in idle state");
+    }
+    public IdleState(VendingMachine vendingMachine) {
+        System.out.println("Curerntly in idle state");
+        vendingMachine.setCoins(new ArrayList<>());
     }
 
     @Override
-    public Item dispenseProduct(VendingMachine vendingMachine, int codeNo) {
-        final Item item = vendingMachine.getInventory().getItem(codeNo);
-        vendingMachine.getInventory().updateSoldOutItem(codeNo);
-        vendingMachine.setCurrentState(new IdleState());
-        return item;
+    public void clickOnInsertCoinButton(VendingMachine vendingMachine) {
+        vendingMachine.setCurrentState(new HasMoneyState());
     }
 }
 
@@ -125,21 +126,6 @@ class HasMoneyState implements VMState {
         final List<Coin> coinsToRefund = vendingMachine.getCoins();
         vendingMachine.setCurrentState(new IdleState(vendingMachine));
         return coinsToRefund;
-    }
-}
-
-class IdleState implements VMState {
-    public IdleState() {
-        System.out.println("Currently in idle state");
-    }
-    public IdleState(VendingMachine vendingMachine) {
-        System.out.println("Curerntly in idle state");
-        vendingMachine.setCoins(new ArrayList<>());
-    }
-
-    @Override
-    public void clickOnInsertCoinButton(VendingMachine vendingMachine) {
-        vendingMachine.setCurrentState(new HasMoneyState());
     }
 }
 
@@ -177,6 +163,20 @@ class SelectionState implements VMState {
     public int getChange(int returnChange) {
         System.out.println("returning change of: " + returnChange);
         return returnChange;
+    }
+}
+
+class DispenseState implements VMState {
+    public DispenseState(VendingMachine vendingMachine, int codeNo) {
+        dispenseProduct(vendingMachine, codeNo);
+    }
+
+    @Override
+    public Item dispenseProduct(VendingMachine vendingMachine, int codeNo) {
+        final Item item = vendingMachine.getInventory().getItem(codeNo);
+        vendingMachine.getInventory().updateSoldOutItem(codeNo);
+        vendingMachine.setCurrentState(new IdleState());
+        return item;
     }
 }
 

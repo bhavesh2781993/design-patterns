@@ -1,5 +1,10 @@
 package creational;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
+
 /**
  * This is a factory of factory
  */
@@ -18,6 +23,8 @@ public class AbstractFactory {
 
         // EntityManagerFactory emf = Persistence.createEntityManagerFactory();
         // EntityManager em = emf.createEntityManager();
+
+        Stack<Integer> lst = new Stack<>();
     }
 }
 
