@@ -4,7 +4,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * Prevent singleton breakage from cloning, deserialization, reflection
+ * Prevent singleton breakage from cloning, deserialization, reflection, multithreading
  */
 public class Singleton implements Serializable, Cloneable {
 
@@ -40,5 +40,19 @@ public class Singleton implements Serializable, Cloneable {
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+}
+
+/**
+ * Using Bill Pugh Method
+ */
+class SingletonUsingBillPugh {
+
+    private static class Singleton {
+        private static final SingletonUsingBillPugh INSTANCE = new SingletonUsingBillPugh();
+    }
+
+    public static SingletonUsingBillPugh getInstance() {
+        return Singleton.INSTANCE;
     }
 }
